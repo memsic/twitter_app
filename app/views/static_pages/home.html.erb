@@ -1,2 +1,52 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<!DOCTYPE>
+<html>
+	<head>
+	<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+	<script src="http://scripts.embed.ly/jquery.embedly.min.js"></script>
+	<script type="text/javascript">
+	  $('document').ready(function(){
+	    $('div.content').embedly({
+		  key: '8872828d3cdf40e8837baab3f0d76fc7',
+	      maxWidth: 500,
+	      wmode: 'transparent',
+	      method: 'after'
+	    });
+	  });
+	</script>
+	</head>
+
+	<div class="center hero-unit">
+	  <h1>@memsic Twitter App</h1>
+	  <h2>
+	    See how Twitter celebrities are using their words.
+	  </h2>
+	</div>
+
+	<div class="center page-header">
+	    <h3>
+	      Pick a word. We'll show you the most recent Twitter celeb to use it.
+	    </h3>
+	</div>
+
+	<div class="row">
+	  <form action="<%= root_path %>" method="get">
+		<div class="span6 offset3">
+			<%= text_field_tag :search, params[:search] %>
+		</div>
+		<div>
+			<%= submit_tag "Search", :name => nil, class: "btn btn-large btn-custom", style: "margin-left:7.5px" %>
+		</div>
+	  </form>
+	</div>
+	
+	<% if @search.nil? %>
+	<div></div>
+	<% else %>
+	<div class="content">
+	   <h2>Which Twitter celeb most recently said "<%= @search %>?"</h2>
+	   <h3>The answer is @<%= @user %>.</h3>
+	   <a href="https://twitter.com/<%= @user %>/status/<%= @id %>"></a>
+	</div>
+	<% end %>
+	
+</html>
