@@ -39,8 +39,11 @@
 	  </form>
 	</div>
 	
-	<% if @search.nil? %>
+	<% if @search.nil? || @search.blank? %>
 	<div></div>
+	<% elsif @user.nil? %>
+	   <h2>Which Twitter celeb most recently said "<%= @search %>?"</h2>
+	   <h3>The answer is NO ONE. Try again please.</h3>
 	<% else %>
 	<div class="content">
 	   <h2>Which Twitter celeb most recently said "<%= @search %>?"</h2>

@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   
   def home   
-    if (params[:search] != "") && (params[:search] != nil)
+    if (!params[:search].blank?) && (!params[:search].nil?)
       @search = params[:search]
       
       Twitter.configure do |config|
@@ -12,13 +12,16 @@ class StaticPagesController < ApplicationController
       end
       
       Twitter.search("#{@search} -rt", :rpp => 1).results.map do |status|
-        @user = "#{status.from_user}"
-        @id = "#{status.id}"  
+          @user = "#{status.from_user}"
+          @id = "#{status.id}"  
       end
       
+    elsif (params[:search].blank?) && (!params[:search].nil?)
+      @search = params[:search]
+      flash.now[:error] = "You didn't enter anything!"
+    end
+    
     else
       @search = nil
     end
   end
-  
-end
