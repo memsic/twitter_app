@@ -19,7 +19,7 @@ class StaticPagesController < ApplicationController
         config.oauth_token_secret = "lghlxjtPtmFlkoVjzZjozISqaZS1f8P1wXArNpPkpQ"
       end
       
-      Twitter.search("#{@search} -rt", :rpp => 1).results.map do |status|
+      Twitter.search("#{@search} -rt", :rpp => 1, :lang => 'en', :result_type => 'popular').results.map do |status|
           @user = "#{status.from_user}"
           @id = "#{status.id}"  
       end
